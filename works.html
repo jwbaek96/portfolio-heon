@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,45 +42,189 @@
                 </div>
             </div>
             <div class="worksNavBar-r">
-                <span>20 results</span>
+                <span>results</span>
             </div>
         </div>
         <ol class="item-container">
-            
         </ol>
     </main>
 
-<!-- JS -->
- <script>
-    const itemDB = [
-    {num : "1", onoff:"on",categories : "Music Video", title : "Hot December", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/fd956ade-1172-4737-b038-6e6e7fe9c898_carw_202x158x640.png?h=eb0780a66297ad6e9c6073316396cb2c"},
-    {num : "2", onoff:"on",categories : "Music Video", title : "O-He", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/36816b8f-b1c3-45d2-b953-e91b9e2f0b50_carw_202x158x640.png?h=e7491ef09cb7f6681d4c0e7c117665e8"},
-    {num : "3", onoff:"on",categories : "Commercial", title : "Don't regret", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/bff003ed-0440-4bb3-9107-5195aedc1870_carw_202x158x640.png?h=a26809e9b2f041b6fd72ca46cc71ac5a"},
-    {num : "4", onoff:"on",categories : "Commercial", title : "Eternally Reborn", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/24ac2ed4-8c4f-45f2-a948-4cedca36cf84_carw_202x158x640.png?h=632f30354b342fada1415146cf12deae"},
-    {num : "5", onoff:"on",categories : "Commercial", title : "G4G", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/93ec7f87-0abc-4a6a-bf14-e24af232c7de_rwc_795x204x2244x1754x640.png?h=e96d56a0f10f5b6ce1b22670aebf54ef"},
-    {num : "6", onoff:"on",categories : "Short Film", title : "The Dinner After", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/5abc2562-d158-44f9-9ab7-411b3d87c542_rwc_540x0x2762x2160x640.jpg?h=187bb2b3908c5288a6fa122b430b5ab9"},
-    {num : "7", onoff:"on",categories : "Short Film", title : "Virile", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/2186f3bd-8428-4430-b53d-98221823a3c3_rwc_473x0x1097x858x1097.jpg?h=bdda75f70e0335409203ddd903ddbbdd"},
-    {num : "8", onoff:"on",categories : "Short Film", title : "Deep Clean", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/d541beb3-be1c-4b96-8741-0c58f32fa67f_rwc_473x0x1097x858x1097.jpg?h=fe3880f473d61e9253a818c54864fe0c"},
-    {num : "9", onoff:"on",categories : "Short Film", title : "Terminus", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/36b55cf6-8e29-4817-970d-eebc9981cf72_car_202x158.jpg?h=995e59061a8725e67c5c0ef5688d81d7"},
-    {num : "10", onoff:"on",categories : "Documentary", title : "In the shadow of giants", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/16288280-9439-40ee-bc17-a0a9a1961c0f_rwc_270x0x1381x1080x1381.jpg?h=c7e1ae9787e5e72da72a15caba1d9e3d"},
-    {num : "11", onoff:"on",categories : "Short Film", title : "Keeper", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e1e6f1d7-d096-415c-ac91-887e569b12c2_car_202x158.jpg?h=1d922b52020013ec581cd94c54ece63b"},
-    {num : "12", onoff:"on",categories : "Short Film", title : "ECA", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/b673d75d-1f30-4b5f-a869-2e087ef47aaa_car_202x158.jpg?h=e9433b5011108fa6944f4e50aed5d600"},
-    {num : "13", onoff:"on",categories : "Commercial", title : "Breakable", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/68b5d3b5-c645-402f-bffb-50ec57d801cb_rwc_473x0x1097x858x1097.jpg?h=1fe7a6a797d5ccd57146e6bd2db94732"},
-    {num : "14", onoff:"on",categories : "Documentary", title : "Blue Mind", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/4afc94f5-37da-438b-bb0c-688d56f5b26f_car_202x158.jpg?h=e6405cb7caf61761ca0eb5f8c5dfd380"},
-    {num : "15", onoff:"on",categories : "Commercial", title : "Too Soft", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/13091e97-1692-4a30-9280-b15d9bdea661_car_202x158.jpg?h=54bb11c982239ceb1a5e2d6b0cf7e56a"},
-    {num : "16", onoff:"on",categories : "Short Film Animation", title : "Ascent", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/7f8dd7f1-dacf-4fd6-b103-36b7e7a640fa_car_202x158.jpg?h=4db1bf92faeb631c612c33df504f669f"},
-    {num : "17", onoff:"on",categories : "Short Film", title : "Nome and Worm", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e1fcd0df-7fba-42b2-92fe-74946f49ad4b_car_202x158.jpg?h=8abaa567464170f390d2dc08dbc07bc6"},
-    {num : "18", onoff:"on",categories : "Documentary", title : "Outsiders", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/4964ba70-1057-489b-bce8-d2c419c7b1af_car_202x158.jpg?h=df2de1185d9ba2bd4ae1b4401859eb05"},
-    {num : "19", onoff:"on",categories : "Film Restoration", title : "Dreamland Express", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/75369e80-2a18-4fe0-92dc-c64d58dc8d2d_car_202x158.jpg?h=3353da62e65e6d03837e7d43812e2374"},
-    {num : "20", onoff:"on",categories : "Short Film", title : "Eat, Chips, Love", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/a4c3f46c-d95f-4e40-b344-296ba4969f4a_car_202x158.jpg?h=5c41737a2d0c0780e8260d3d0da869a0"},
-    // 페이지가 추가된다면 마지막 줄를 복사해주세요.
-    // num의 숫자는 12345~ 순서대로 맞춰주세요. num의 이름과 페이지 이름이 동일해야합니다.
-    // onoff ➡ off로 설정하면 해당 링크는 보이지 않게 됩니다.
-    // categories와 title을 알맞게 변경해주세요.
-    // img에 썸네일 이미지 링크를 넣어주세요.
-    ]
- </script>
-<script src="./workTable.js"></script>
+    <!-- 로딩 스피너 -->
+    <div id="loadingSpinner" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0e0e0e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    ">
+        <div style="
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        "></div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+
+<script>
+    // ========== 설정 ==========
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxPncRFevyI6TrJsXDg15izhSs8SmJd8BCzgAKAtm5HgyIwfrGtSYOIcwZabogha5gYzA/exec';
+    
+    const itemContainer = document.querySelector('.item-container');
+    const optionContainer = document.querySelector('.item-filter-option-container');
+    const itemFilterTopText = document.querySelector('.item-filter-top-text');
+    const filterCheckbox = document.querySelector('#filterCheckbox');
+    const resultsSpan = document.querySelector('.worksNavBar-r span');
+    
+    let allPosts = []; // 전체 게시물 저장
+
+    // ========== 구글 시트에서 데이터 로드 ==========
+    async function loadPostsFromSheet() {
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'getPosts'
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                allPosts = result.posts;
+                initializeFilter();
+                renderItems(allPosts);
+            } else {
+                throw new Error(result.message || 'Failed to load posts');
+            }
+        } catch (error) {
+            console.error('Load error:', error);
+            alert('Failed to load posts. Please try again later.');
+        } finally {
+            // 로딩 스피너 제거
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) spinner.remove();
+        }
+    }
+
+    // ========== 필터 초기화 ==========
+    function initializeFilter() {
+        // 고유한 카테고리 추출
+        const categories = [...new Set(allPosts.map(post => post.category).filter(cat => cat))];
+
+        // 필터 옵션 생성
+        optionContainer.innerHTML = `
+            <li class="item-filter-option active">
+                <span class="item-filter-checksvg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11" stroke-width="1.5">
+                        <path d="M 2.5 5.5 L 3.5 6.5 L 4.5 7.5 L 8.5 3.5" fill="transparent" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+                ALL
+            </li>` + categories.map(category => `
+            <li class="item-filter-option">${category}</li>
+        `).join('');
+
+        // 필터 옵션 클릭 이벤트
+        optionContainer.addEventListener('click', event => {
+            if (event.target.classList.contains('item-filter-option')) {
+                const selectedCategory = event.target.textContent.trim();
+                itemFilterTopText.textContent = selectedCategory;
+
+                // 모든 SVG 제거
+                document.querySelectorAll('.item-filter-option svg').forEach(svg => svg.remove());
+
+                // 선택된 옵션에 SVG 추가
+                event.target.innerHTML = `
+                    <span class="item-filter-checksvg">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11" stroke-width="1.5">
+                            <path d="M 2.5 5.5 L 3.5 6.5 L 4.5 7.5 L 8.5 3.5" fill="transparent" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                    ${selectedCategory}`;
+
+                // 필터링
+                const filteredPosts = selectedCategory === 'ALL'
+                    ? allPosts
+                    : allPosts.filter(post => post.category === selectedCategory);
+
+                renderItems(filteredPosts);
+                filterCheckbox.checked = false;
+            }
+        });
+    }
+
+    // ========== 구글 드라이브 URL을 썸네일 URL로 변환 ==========
+    function convertToThumbnailUrl(url) {
+        if (!url) return 'https://via.placeholder.com/640x480?text=No+Image';
+        
+        // Google Drive URL에서 파일 ID 추출
+        const patterns = [
+            /[?&]id=([a-zA-Z0-9_-]+)/,     // id=FILE_ID 형식 (먼저 체크)
+            /\/d\/([a-zA-Z0-9_-]+)/,        // /d/FILE_ID 형식
+            /\/file\/d\/([a-zA-Z0-9_-]+)/   // /file/d/FILE_ID 형식
+        ];
+        
+        for (let pattern of patterns) {
+            const match = url.match(pattern);
+            if (match && match[1]) {
+                const fileId = match[1];
+                // 썸네일 API 사용 (더 안정적)
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+            }
+        }
+        
+        // 패턴 매칭 실패 시 원본 URL 반환
+        return url;
+    }
+
+    // ========== 아이템 렌더링 ==========
+    function renderItems(posts) {
+        if (posts.length === 0) {
+            itemContainer.innerHTML = '';
+            resultsSpan.textContent = '0 results';
+            return;
+        }
+
+        const itemsHTML = posts.map(post => {
+            const thumbnailUrl = convertToThumbnailUrl(post.thumbnail);
+            return `
+            <a href="post.html?id=${post.id}" class="witem">
+                <div class="witem-thumb">
+                    <img src="${thumbnailUrl}" 
+                         alt="${post.title}" 
+                         class="witem-img"
+                         onerror="this.src='https://via.placeholder.com/640x480?text=No+Image'; this.onerror=null;">
+                </div>
+                <div class="witem-info">
+                    <span class="witem-categories">${post.category || 'Uncategorized'}</span>
+                    <div class="witem-title">${post.title}</div>
+                </div>
+            </a>
+        `;
+        }).join('');
+
+        itemContainer.innerHTML = itemsHTML;
+        resultsSpan.textContent = `${posts.length} results`;
+    }
+
+    // ========== 초기 로드 ==========
+    loadPostsFromSheet();
+</script>
+
 <script src="./navToggle.js"></script>
+<script src="./auth.js"></script>
 </body>
 </html>

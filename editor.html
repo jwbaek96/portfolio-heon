@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor - LEE JONGHEON</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            overflow-y: auto;
+            display: block;
+        }
+
+        .editor-container {
+            max-width: 1000px;
+            margin: 80px auto 40px;
+            padding: 40px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .editor-header h1 {
+            font-size: 28px;
+            color: var(--txtColor-home);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary, .btn-primary {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-secondary {
+            background-color: #3a3a3a;
+            color: var(--txtColor-1);
+        }
+
+        .btn-primary {
+            background-color: var(--txtColor-home);
+            color: #000;
+        }
+
+        .btn-secondary:hover, .btn-primary:hover {
+            opacity: 0.8;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--txtColor-2);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-section input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+            color: var(--txtColor-1);
+            font-size: 16px;
+        }
+
+        .form-section input[type="text"]:focus {
+            outline: none;
+            border-color: var(--txtColor-home);
+        }
+
+        .content-editor {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #3a3a3a;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            padding: 8px 15px;
+            background-color: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            border-radius: 4px;
+            color: var(--txtColor-1);
+            cursor: pointer;
+            font-size: 13px;
+            transition: background-color 0.3s;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #4a4a4a;
+        }
+
+        .toolbar-btn.active {
+            background-color: var(--txtColor-home);
+            color: #000;
+            border-color: var(--txtColor-home);
+        }
+
+        .alignment-group {
+            display: flex;
+            gap: 5px;
+            padding: 5px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+        }
+
+        .alignment-btn {
+            padding: 8px 12px;
+            background-color: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            border-radius: 3px;
+            color: var(--txtColor-1);
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+
+        .alignment-btn:hover {
+            background-color: #4a4a4a;
+        }
+
+        .alignment-btn.active {
+            background-color: var(--txtColor-home);
+            color: #000;
+        }
+
+        .content-area {
+            min-height: 300px;
+            outline: none;
+            color: var(--txtColor-1);
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .content-area img, .content-area video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+
+        .content-area img {
+            object-fit: contain;
+        }
+
+        .content-area video {
+            background-color: #000;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .media-preview {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .media-item {
+            position: relative;
+            max-width: 200px;
+        }
+
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .remove-media {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        /* 로딩 오버레이 */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            border: 4px solid #3a3a3a;
+            border-top: 4px solid var(--txtColor-home);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--txtColor-1);
+            font-size: 16px;
+        }
+
+        /* HTML 보기 모달 */
+        .html-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .html-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .html-modal-content {
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .html-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .html-modal-header h2 {
+            color: var(--txtColor-home);
+            margin: 0;
+        }
+
+        .html-modal-close {
+            background-color: #3a3a3a;
+            color: var(--txtColor-1);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .html-modal-close:hover {
+            background-color: #ff4444;
+        }
+
+        .html-modal-actions {
+            margin-bottom: 15px;
+        }
+
+        .html-copy-btn {
+            background-color: var(--txtColor-home);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .html-copy-btn:hover {
+            opacity: 0.8;
+        }
+
+        .html-code-container {
+            flex: 1;
+            overflow: auto;
+            background-color: #0a0a0a;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .html-code {
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* 썸네일 업로드 섹션 */
+        .thumbnail-section {
+            margin-top: 15px;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+        }
+
+        .thumbnail-upload-area {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .thumbnail-preview {
+            width: 200px;
+            height: 150px;
+            background-color: #1a1a1a;
+            border: 2px dashed #3a3a3a;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumbnail-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-preview.empty {
+            color: var(--txtColor-4);
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .thumbnail-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            display: none;
+        }
+
+        .thumbnail-preview:not(.empty) .thumbnail-remove {
+            display: block;
+        }
+
+        .thumbnail-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .thumbnail-btn {
+            padding: 10px 15px;
+            background-color: #3a3a3a;
+            border: 1px solid #4a4a4a;
+            border-radius: 5px;
+            color: var(--txtColor-1);
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .thumbnail-btn:hover {
+            background-color: #4a4a4a;
+        }
+
+        .thumbnail-info {
+            font-size: 12px;
+            color: var(--txtColor-3);
+            line-height: 1.5;
+        }
+
+        @media screen and (max-width: 768px) {
+            .thumbnail-upload-area {
+                flex-direction: column;
+            }
+
+            .thumbnail-preview {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .editor-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .editor-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .editor-toolbar {
+                gap: 5px;
+            }
+
+            .toolbar-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 로딩 오버레이 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Uploading...</div>
+    </div>
+
+    <!-- HTML 보기 모달 -->
+    <div class="html-modal" id="htmlModal">
+        <div class="html-modal-content">
+            <div class="html-modal-header">
+                <h2>HTML Code</h2>
+                <button class="html-modal-close" id="closeHtmlModal">×</button>
+            </div>
+            <div class="html-modal-actions">
+                <button class="html-copy-btn" id="copyHtmlBtn">Copy HTML</button>
+            </div>
+            <div class="html-code-container">
+                <pre class="html-code" id="htmlCodeDisplay"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor-container">
+        <div class="editor-header">
+            <h1>NEW POST</h1>
+            <div class="header-actions">
+                <button class="btn-secondary" onclick="window.history.back()">Cancel</button>
+                <button type="button" class="btn-secondary" id="viewHtmlBtn">View HTML</button>
+                <button class="btn-primary" id="saveBtn">Save</button>
+            </div>
+        </div>
+
+        <form id="editorForm">
+            <div class="form-section">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="Enter title..." required>
+            </div>
+
+            <div class="form-section">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" placeholder="Enter category...">
+                
+                <div class="thumbnail-section">
+                    <label>Thumbnail</label>
+                    <div class="thumbnail-upload-area">
+                        <div class="thumbnail-preview empty" id="thumbnailPreview">
+                            <span>No thumbnail</span>
+                            <button type="button" class="thumbnail-remove" id="removeThumbnailBtn">×</button>
+                        </div>
+                        <div class="thumbnail-controls">
+                            <button type="button" class="thumbnail-btn" id="uploadThumbnailBtn">Upload Thumbnail</button>
+                            <div class="thumbnail-info">
+                                Upload a custom thumbnail image for your post.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label>Content</label>
+                <div class="content-editor">
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" id="addImageBtn">Add Image</button>
+                        <button type="button" class="toolbar-btn" id="addVideoBtn">Add Video</button>
+                    </div>
+                    
+                    <div class="content-area" id="contentArea" contenteditable="true" data-placeholder="Start typing your content here...">
+                    </div>
+                </div>
+            </div>
+
+            <input type="file" id="imageInput" accept="image/*" multiple>
+            <input type="file" id="videoInput" accept="video/*" multiple>
+            <input type="file" id="thumbnailInput" accept="image/*">
+        </form>
+    </div>
+
+    <script>
+        // ========== 설정 ==========
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxPncRFevyI6TrJsXDg15izhSs8SmJd8BCzgAKAtm5HgyIwfrGtSYOIcwZabogha5gYzA/exec';
+        
+        // 로그인 체크
+        if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+            window.location.href = './admin-login.html';
+        }
+
+        // URL에서 게시물 ID 가져오기 (수정 모드)
+        const urlParams = new URLSearchParams(window.location.search);
+        const editPostId = urlParams.get('id');
+        const isEditMode = !!editPostId;
+
+        const contentArea = document.getElementById('contentArea');
+        const imageInput = document.getElementById('imageInput');
+        const videoInput = document.getElementById('videoInput');
+        const addImageBtn = document.getElementById('addImageBtn');
+        const addVideoBtn = document.getElementById('addVideoBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingText = document.getElementById('loadingText');
+
+        // 썸네일 관련 요소
+        const thumbnailInput = document.getElementById('thumbnailInput');
+        const thumbnailPreview = document.getElementById('thumbnailPreview');
+        const uploadThumbnailBtn = document.getElementById('uploadThumbnailBtn');
+        const removeThumbnailBtn = document.getElementById('removeThumbnailBtn');
+        const viewHtmlBtn = document.getElementById('viewHtmlBtn');
+        const htmlModal = document.getElementById('htmlModal');
+        const closeHtmlModal = document.getElementById('closeHtmlModal');
+        const copyHtmlBtn = document.getElementById('copyHtmlBtn');
+        const htmlCodeDisplay = document.getElementById('htmlCodeDisplay');
+        
+        let thumbnailUrl = ''; // 업로드된 썸네일 URL 저장
+
+        // ========== 구글 드라이브 URL을 썸네일 URL로 변환 ==========
+        function convertToThumbnailUrl(url) {
+            if (!url) return '';
+            
+            // Google Drive URL에서 파일 ID 추출
+            const patterns = [
+                /[?&]id=([a-zA-Z0-9_-]+)/,     // id=FILE_ID 형식 (먼저 체크)
+                /\/d\/([a-zA-Z0-9_-]+)/,        // /d/FILE_ID 형식
+                /\/file\/d\/([a-zA-Z0-9_-]+)/   // /file/d/FILE_ID 형식
+            ];
+            
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) {
+                    const fileId = match[1];
+                    // 썸네일 API 사용 (더 안정적)
+                    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+                }
+            }
+            
+            // 패턴 매칭 실패 시 원본 URL 반환
+            return url;
+        }
+
+        // ========== 수정 모드: 기존 게시물 로드 ==========
+        async function loadPostForEdit() {
+            if (!isEditMode) return;
+
+            showLoading('Loading post...');
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'getPost',
+                        id: editPostId
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const post = result.post;
+                    
+                    // 폼에 데이터 채우기
+                    document.getElementById('title').value = post.title;
+                    document.getElementById('category').value = post.category || '';
+                    
+                    // 컨텐츠의 이미지 URL 변환
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = post.content;
+                    const images = tempDiv.querySelectorAll('img');
+                    images.forEach(img => {
+                        img.src = convertToThumbnailUrl(img.src);
+                    });
+                    contentArea.innerHTML = tempDiv.innerHTML;
+                    
+                    // 썸네일 설정
+                    if (post.thumbnail) {
+                        thumbnailUrl = post.thumbnail;
+                        thumbnailPreview.src = convertToThumbnailUrl(post.thumbnail);
+                        thumbnailPreview.style.display = 'block';
+                        removeThumbnailBtn.style.display = 'inline-block';
+                    }
+                    
+                    // 저장 버튼 텍스트 변경
+                    saveBtn.textContent = 'Update Post';
+                    
+                    hideLoading();
+                } else {
+                    throw new Error(result.message || 'Failed to load post');
+                }
+            } catch (error) {
+                hideLoading();
+                alert('Failed to load post: ' + error.message);
+                window.location.href = './works.html';
+            }
+        }
+
+        // ========== HTML 보기 ==========
+        viewHtmlBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const htmlContent = contentArea.innerHTML;
+            htmlCodeDisplay.textContent = htmlContent;
+            htmlModal.classList.add('active');
+        });
+
+        closeHtmlModal.addEventListener('click', () => {
+            htmlModal.classList.remove('active');
+        });
+
+        copyHtmlBtn.addEventListener('click', () => {
+            const htmlText = htmlCodeDisplay.textContent;
+            navigator.clipboard.writeText(htmlText).then(() => {
+                const originalText = copyHtmlBtn.textContent;
+                copyHtmlBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyHtmlBtn.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        });
+
+        // 모달 외부 클릭 시 닫기
+        htmlModal.addEventListener('click', (e) => {
+            if (e.target === htmlModal) {
+                htmlModal.classList.remove('active');
+            }
+        });
+
+        // ========== 유틸리티 함수 ==========
+        function showLoading(message = 'Loading...') {
+            loadingText.textContent = message;
+            loadingOverlay.classList.add('active');
+        }
+
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1]; // data:image/png;base64, 제거
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function uploadMediaToGoogleDrive(file) {
+            try {
+                const base64Data = await fileToBase64(file);
+                
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'uploadMedia',
+                        fileData: base64Data,
+                        fileName: file.name,
+                        mimeType: file.type
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    return result.url;
+                } else {
+                    throw new Error(result.message || 'Upload failed');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                throw error;
+            }
+        }
+
+        // ========== 이미지 추가 ==========
+        addImageBtn.addEventListener('click', () => {
+            imageInput.click();
+        });
+
+        imageInput.addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (files.length === 0) return;
+
+            try {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    // 먼저 로컬 미리보기 표시
+                    const img = document.createElement('img');
+                    img.contentEditable = 'false'; // 이미지는 편집 불가
+                    const localUrl = URL.createObjectURL(file);
+                    img.src = localUrl;
+                    img.style.display = 'block';
+                    img.style.margin = '20px auto';
+                    img.style.marginLeft = 'auto';
+                    img.style.marginRight = 'auto';
+                    img.style.opacity = '0.5'; // 업로드 중 표시
+                    contentArea.appendChild(img);
+                    contentArea.appendChild(document.createElement('br'));
+                    
+                    // 백그라운드에서 업로드
+                    showLoading(`Uploading image ${i + 1}/${files.length}...`);
+                    
+                    try {
+                        const driveUrl = await uploadMediaToGoogleDrive(file);
+                        
+                        // Drive URL을 썸네일 형식으로 변환
+                        const thumbnailUrl = convertToThumbnailUrl(driveUrl);
+                        
+                        // 업로드 완료 후 URL 교체 - 이미지 로드를 기다림
+                        await new Promise((resolve, reject) => {
+                            const tempImg = new Image();
+                            tempImg.onload = () => {
+                                img.src = thumbnailUrl;
+                                img.style.opacity = '1';
+                                URL.revokeObjectURL(localUrl); // 메모리 해제
+                                resolve();
+                            };
+                            tempImg.onerror = () => {
+                                // 로드 실패해도 URL은 교체 (나중에 로드될 수 있음)
+                                img.src = thumbnailUrl;
+                                img.style.opacity = '1';
+                                URL.revokeObjectURL(localUrl);
+                                resolve();
+                            };
+                            tempImg.src = thumbnailUrl;
+                        });
+                    } catch (uploadError) {
+                        // 업로드 실패 시 이미지 제거
+                        img.remove();
+                        throw uploadError;
+                    }
+                }
+                
+                hideLoading();
+                imageInput.value = '';
+            } catch (error) {
+                hideLoading();
+                alert('Image upload failed: ' + error.message);
+                imageInput.value = '';
+            }
+        });
+
+        // ========== 비디오 추가 ==========
+        addVideoBtn.addEventListener('click', () => {
+            videoInput.click();
+        });
+
+        videoInput.addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (files.length === 0) return;
+
+            try {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    // 먼저 로컬 미리보기 표시
+                    const video = document.createElement('video');
+                    video.contentEditable = 'false'; // 비디오는 편집 불가
+                    const localUrl = URL.createObjectURL(file);
+                    video.src = localUrl;
+                    video.controls = true;
+                    video.style.display = 'block';
+                    video.style.width = '100%';
+                    video.style.maxWidth = '800px';
+                    video.style.margin = '20px auto';
+                    video.style.marginLeft = 'auto';
+                    video.style.marginRight = 'auto';
+                    video.style.opacity = '0.5'; // 업로드 중 표시
+                    contentArea.appendChild(video);
+                    contentArea.appendChild(document.createElement('br'));
+                    
+                    // 백그라운드에서 업로드
+                    showLoading(`Uploading video ${i + 1}/${files.length}... (This may take a while)`);
+                    
+                    try {
+                        const driveUrl = await uploadMediaToGoogleDrive(file);
+                        
+                        // 업로드 완료 후 URL 교체
+                        video.src = driveUrl;
+                        video.style.opacity = '1';
+                        URL.revokeObjectURL(localUrl); // 메모리 해제
+                    } catch (uploadError) {
+                        // 업로드 실패 시 비디오 제거
+                        video.remove();
+                        throw uploadError;
+                    }
+                }
+                
+                hideLoading();
+                videoInput.value = '';
+            } catch (error) {
+                hideLoading();
+                alert('Video upload failed: ' + error.message);
+                videoInput.value = '';
+            }
+        });
+
+        // ========== 썸네일 관리 ==========
+        // 썸네일 업로드 버튼
+        uploadThumbnailBtn.addEventListener('click', () => {
+            thumbnailInput.click();
+        });
+
+        // 썸네일 파일 선택 시
+        thumbnailInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            showLoading('Uploading thumbnail...');
+
+            try {
+                const driveUrl = await uploadMediaToGoogleDrive(file);
+                
+                // Drive URL을 썸네일 형식으로 변환
+                const thumbnailUrlConverted = convertToThumbnailUrl(driveUrl);
+                thumbnailUrl = thumbnailUrlConverted;
+                
+                // 미리보기 업데이트
+                thumbnailPreview.classList.remove('empty');
+                thumbnailPreview.innerHTML = `
+                    <img src="${thumbnailUrlConverted}" alt="Thumbnail">
+                    <button type="button" class="thumbnail-remove" id="removeThumbnailBtn">×</button>
+                `;
+                
+                // 삭제 버튼 이벤트 재등록
+                document.getElementById('removeThumbnailBtn').addEventListener('click', removeThumbnail);
+                
+                hideLoading();
+                thumbnailInput.value = '';
+            } catch (error) {
+                hideLoading();
+                alert('Thumbnail upload failed: ' + error.message);
+                thumbnailInput.value = '';
+            }
+        });
+
+        // 썸네일 제거
+        function removeThumbnail() {
+            thumbnailUrl = '';
+            thumbnailPreview.classList.add('empty');
+            thumbnailPreview.innerHTML = '<span>No thumbnail</span>';
+        }
+
+        // 초기 삭제 버튼 이벤트
+        removeThumbnailBtn.addEventListener('click', removeThumbnail);
+
+        // ========== 썸네일 추출 (Deprecated - thumbnailUrl 사용) ==========
+        function extractThumbnail() {
+            // thumbnailUrl이 있으면 사용, 없으면 첫 이미지 자동 추출
+            if (thumbnailUrl) {
+                return thumbnailUrl;
+            }
+            const firstImg = contentArea.querySelector('img');
+            return firstImg ? firstImg.src : '';
+        }
+
+        // ========== 저장 기능 ==========
+        saveBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const content = contentArea.innerHTML;
+            const thumbnail = extractThumbnail();
+
+            if (!title.trim()) {
+                alert('Please enter a title.');
+                return;
+            }
+
+            if (!content.trim() || content === '<br>') {
+                alert('Please enter some content.');
+                return;
+            }
+
+            showLoading(isEditMode ? 'Updating post...' : 'Saving post...');
+
+            try {
+                const requestData = {
+                    action: isEditMode ? 'updatePost' : 'savePost',
+                    title: title,
+                    category: category,
+                    content: content,
+                    thumbnail: thumbnail
+                };
+
+                // 수정 모드일 경우 ID 추가
+                if (isEditMode) {
+                    requestData.id = editPostId;
+                }
+
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(requestData)
+                });
+
+                const result = await response.json();
+
+                hideLoading();
+
+                if (result.success) {
+                    alert(isEditMode ? 'Post updated successfully!' : 'Post saved successfully!');
+                    window.location.href = isEditMode ? `./post.html?id=${editPostId}` : './works.html';
+                } else {
+                    throw new Error(result.message || 'Save failed');
+                }
+            } catch (error) {
+                hideLoading();
+                alert('Save failed: ' + error.message);
+            }
+        });
+
+        // ========== 초기화 ==========
+        // 수정 모드일 경우 게시물 로드
+        if (isEditMode) {
+            loadPostForEdit();
+        }
+
+        // ========== Placeholder 효과 ==========
+        contentArea.addEventListener('focus', function() {
+            // 실제 컨텐츠(이미지, 비디오 등)가 있는지 확인
+            const hasContent = this.children.length > 0 || this.textContent.trim() !== '';
+            if (!hasContent) {
+                this.innerHTML = '';
+            }
+        });
+
+        contentArea.addEventListener('blur', function() {
+            // 실제 컨텐츠(이미지, 비디오 등)가 있는지 확인
+            const hasContent = this.children.length > 0 || this.textContent.trim() !== '';
+            if (!hasContent) {
+                this.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

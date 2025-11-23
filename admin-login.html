@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - LEE JONGHEON</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: var(--txtColor-home);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--txtColor-2);
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+            color: var(--txtColor-1);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--txtColor-home);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--txtColor-home);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.8;
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: var(--txtColor-3);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-link a:hover {
+            color: var(--txtColor-home);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>ADMIN LOGIN</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <div class="error-message" id="errorMessage">
+                Incorrect password. Please try again.
+            </div>
+        </form>
+        <div class="back-link">
+            <a href="./index.html">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (password === '1234') {
+                // 로그인 성공
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                window.location.href = './index.html';
+            } else {
+                // 로그인 실패
+                errorMessage.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
