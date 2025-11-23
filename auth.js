@@ -49,17 +49,24 @@ class AuthManager {
         floatingBtn.id = 'adminFloatingBtn';
         floatingBtn.className = 'admin-floating-btn';
         
-        // post 페이지일 경우 수정 버튼 추가
+        // post 페이지일 경우 수정/삭제 버튼 추가
         const editButton = isPostPage && postId ? `
             <a href="./editor.html?id=${postId}" class="floating-menu-item">
                 Edit Post
             </a>
         ` : '';
         
+        const deleteButton = isPostPage && postId ? `
+            <button class="floating-menu-item delete-btn" id="deletePostBtn" style="color: #ff4444;">
+                Delete Post
+            </button>
+        ` : '';
+        
         floatingBtn.innerHTML = `
             <div class="floating-main-btn" id="floatingMainBtn">+</div>
             <div class="floating-menu" id="floatingMenu">
                 ${editButton}
+                ${deleteButton}
                 <a href="./editor.html" class="floating-menu-item">
                     New Post
                 </a>
@@ -78,6 +85,7 @@ class AuthManager {
         const mainBtn = document.getElementById('floatingMainBtn');
         const menu = document.getElementById('floatingMenu');
         const logoutBtn = document.getElementById('logoutBtn');
+        const deletePostBtn = document.getElementById('deletePostBtn');
 
         mainBtn.addEventListener('click', () => {
             menu.classList.toggle('active');
@@ -89,6 +97,15 @@ class AuthManager {
                 this.logout();
             }
         });
+
+        // 삭제 버튼 이벤트 (post 페이지에서만)
+        if (deletePostBtn && postId) {
+            deletePostBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+                    this.deletePost(postId);
+                }
+            });
+        }
 
         // 메뉴 외부 클릭시 닫기
         document.addEventListener('click', (e) => {
@@ -104,6 +121,41 @@ class AuthManager {
         const btn = document.getElementById('adminFloatingBtn');
         if (btn) {
             btn.remove();
+        }
+    }
+
+    // 게시물 삭제
+    async deletePost(postId) {
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVrZJ_06E1TLjOxqN9o7MOa_CUrB8Yp-o77HybOggFaaP3jCx5h-Ldg5r5ErqTjat80g/exec';
+        
+        try {
+            // 로딩 표시
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'deleteLoading';
+            loadingDiv.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;color:#fff;font-size:18px;';
+            loadingDiv.textContent = 'Deleting post...';
+            document.body.appendChild(loadingDiv);
+
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'deletePost',
+                    id: postId
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Post deleted successfully!');
+                window.location.href = './works.html';
+            } else {
+                throw new Error(result.message || 'Delete failed');
+            }
+        } catch (error) {
+            alert('Failed to delete post: ' + error.message);
+            const loadingDiv = document.getElementById('deleteLoading');
+            if (loadingDiv) loadingDiv.remove();
         }
     }
 }

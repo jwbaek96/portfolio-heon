@@ -24,6 +24,9 @@ function doPost(e) {
       case 'updatePost':
         response = updatePostInSheet(params);
         break;
+      case 'deletePost':
+        response = deletePostFromSheet(params);
+        break;
       case 'getPosts':
         response = getPostsFromSheet(params);
         break;
@@ -122,22 +125,12 @@ function savePostToSheet(params) {
   try {
     const sheet = SpreadsheetApp.openById(SHEET_ID).getActiveSheet();
     
-    // 마지막 행 번호 가져오기
-    const lastRow = sheet.getLastRow();
-    
-    // 새 ID 생성 (마지막 ID + 1)
-    let newId = 1;
-    if (lastRow > 1) {
-      const lastId = sheet.getRange(lastRow, 1).getValue();
-      newId = parseInt(lastId) + 1;
-    }
-    
     // 현재 시간
     const createdAt = new Date().toISOString();
     
-    // 데이터 행 추가
+    // 데이터 행 추가 (ID는 수식으로 자동 생성)
     const rowData = [
-      newId,                    // A: id
+      '',                       // A: id (수식으로 채워질 예정)
       params.title || '',       // B: title
       params.category || '',    // C: category
       params.content || '',     // D: content
@@ -146,6 +139,16 @@ function savePostToSheet(params) {
     ];
     
     sheet.appendRow(rowData);
+    
+    // 방금 추가된 행 번호
+    const newRow = sheet.getLastRow();
+    
+    // A열에 수식 입력: =ROW()-1 (헤더 행 제외)
+    sheet.getRange(newRow, 1).setFormula('=ROW()-1');
+    
+    // 수식 계산 후 ID 값 가져오기
+    SpreadsheetApp.flush(); // 수식 계산 강제 실행
+    const newId = sheet.getRange(newRow, 1).getValue();
     
     return {
       success: true,
@@ -215,6 +218,58 @@ function updatePostInSheet(params) {
     return {
       success: false,
       message: `Update failed: ${error.toString()}`
+    };
+  }
+}
+
+/**
+ * 구글 시트에서 게시물 삭제
+ */
+function deletePostFromSheet(params) {
+  try {
+    const postId = parseInt(params.id);
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getActiveSheet();
+    const lastRow = sheet.getLastRow();
+    
+    if (lastRow <= 1) {
+      return {
+        success: false,
+        message: 'Post not found'
+      };
+    }
+    
+    // 모든 데이터 가져오기
+    const dataRange = sheet.getRange(2, 1, lastRow - 1, 6);
+    const data = dataRange.getValues();
+    
+    // ID로 게시물 행 찾기 (실제 시트 행 번호는 +2)
+    let rowIndex = -1;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i][0] === postId) {
+        rowIndex = i + 2; // 헤더(1) + 인덱스(i) + 1
+        break;
+      }
+    }
+    
+    if (rowIndex === -1) {
+      return {
+        success: false,
+        message: 'Post not found'
+      };
+    }
+    
+    // 해당 행 삭제
+    sheet.deleteRow(rowIndex);
+    
+    return {
+      success: true,
+      message: 'Post deleted successfully'
+    };
+    
+  } catch(error) {
+    return {
+      success: false,
+      message: `Delete failed: ${error.toString()}`
     };
   }
 }

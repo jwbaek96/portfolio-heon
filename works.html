@@ -80,7 +80,7 @@
 
 <script>
     // ========== 설정 ==========
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxPncRFevyI6TrJsXDg15izhSs8SmJd8BCzgAKAtm5HgyIwfrGtSYOIcwZabogha5gYzA/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVrZJ_06E1TLjOxqN9o7MOa_CUrB8Yp-o77HybOggFaaP3jCx5h-Ldg5r5ErqTjat80g/exec';
     
     const itemContainer = document.querySelector('.item-container');
     const optionContainer = document.querySelector('.item-filter-option-container');
@@ -182,7 +182,7 @@
             if (match && match[1]) {
                 const fileId = match[1];
                 // 썸네일 API 사용 (더 안정적)
-                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w350`;
             }
         }
         
@@ -223,6 +223,7 @@
     // ========== 초기 로드 ==========
     loadPostsFromSheet();
 </script>
+
 
 <script src="./navToggle.js"></script>
 <script src="./auth.js"></script>
