@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEE JONGHEON</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        html,body{overflow: hidden;}
+        .textbox{
+            position: fixed;
+            width: 100vw;
+            height: 103%;
+        }
+        .textbox img{
+            width: 100%;
+            height: 100%;
+            object-fit:fill;
+            opacity: .04;
+        }
+        /* video{filter: blur(1px);} */
+        @media screen and (max-width:375px) {
+            .textbox{
+                text-align: center;
+            }
+            .textbox img{
+                /* width: 30%; */
+                object-fit:contain;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted plays-inline class="background-clip">
+        <source src="./HEON(MAIN SHOWREELS)(compressed).mp4">
+    </video>
+    <a href="https://vimeo.com/690301450" target="_blank" class="btn btn-home-vd-container2">
+            <span>View this video</span>
+    </a>
+    <a href="./works.html" target="_self" class="btn btn-works-container">
+            <span>Works</span>
+    </a>
+    <div class="textbox">
+        <img src="./Artboard 1.png">
+    </div>
+</body>
+</html>

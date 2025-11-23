@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LEE JONGHEON</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            html{
+                height: 100%;
+            }
+            body{
+                height: 100%;
+                display: flex;
+                align-items: start;
+                justify-content:flex-start;
+                background-image: url(./bg_img.png);
+                background-size: cover;
+            }
+            main{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .contact p{
+                margin: 10px 0;
+                text-align: center;
+                font-size: 1rem;
+            }
+        </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="navMain">
+            <a href="./index.html">HOME</a>
+            <a href="./works.html">WORK</a>
+            <a href="./contact.html">CONTACT</a>
+        </div>
+    </nav>
+    <header>
+        <div class="header-container">
+            <a href="./index.html" class="header-l">
+                <span>HEON</span>
+            </a>
+            <input type="checkbox" name="" id="navCheckbox" class="dpnone">
+            <div class="header-r">
+                <label for="navCheckbox" id="navToggle" >
+                    +
+                </label>    
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="contact">
+            <p>abg@gmail.com</p>
+            <!-- <p>+44 07950 470513</p> -->
+            <p>010-4503-2715</p>
+        </div>
+    </main>
+
+<!-- JS -->
+<script src="./navToggle.js"></script>
+</body>
+</html>

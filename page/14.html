@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LEE JONGHEON</title>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../pages.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="navMain">
+            <a href="../index.html">HOME</a>
+            <a href="../works.html">WORK</a>
+            <a href="../contact.html">CONTACT</a>
+        </div>
+    </nav>
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="header-l">
+                <span>HEON</span>
+            </a>
+            <input type="checkbox" name="" id="navCheckbox" class="dpnone">
+            <div class="header-r">
+                <label for="navCheckbox" id="navToggle" >
+                    +
+                </label>    
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="worksNavBar">
+            <a href="../works.html">Works</a>
+            <span>></span>
+            <span>Deep Blue</span>
+        </div>
+        <section class="sc-first sc">
+            <p>
+                Director : Kerala Fisher Hart<br>
+                Camera : Sony a7s, DJI Mavic<br>               
+            </p>
+        </section>
+        <section class="sc-slider sc">
+            <div class="img-container" id="imgContainer">
+            </div>
+            <div class="ctrl-container">
+                <div class="btn-move btn-move-prev">&#10094;</div>
+                <div class="btn-move btn-move-c"></div>
+                <div class="btn-move btn-move-next">&#10095;</div>
+            </div>
+        </section>
+        <section class="slideDots"></section>
+        <section class="sc-images sc">
+        </section>
+    </main>
+<!-- JS -->
+<script src="../navToggle.js"></script>
+<script>
+    const slideDB = [
+        {num:"1", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/126023d4-f8e1-420f-859b-2fe45e929709.jpg?h=db7eb3e480f990005d12affc421e87c0"},
+        {num:"2", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/a7183d07-18c5-4865-8125-affa1576e7cb.jpg?h=b67d2862ba1407709b9baaf8988234b3"},
+        {num:"3", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/10d73464-b072-4ec7-94f5-0e198604ed12.jpg?h=baf974d46a9e0a97c4fef9dd97c494ab"},
+        {num:"4", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/1e843c0a-b68b-4cc1-a3e5-2fb56aa7bf01.jpg?h=e5fbc8ec984f27760efae7a8be2947aa"},
+        {num:"5", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/78219c60-9e6c-4341-b8c6-cb81a4147feb.jpg?h=2cb4b1c7568e8fb2c356ae1ce3491bc2"},
+        {num:"6", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/522c7d4b-6b13-45f8-bc27-36da9665dbb1.jpg?h=3860fc6e9d4ef3f10588a01425543d73"},
+        {num:"7", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/44396373-cba7-4110-8eb1-8d64b85bbd7f.jpg?h=5c626fd0baa88cb0b1d16e64f01e582d"},
+        {num:"8", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/44d969a6-237a-4786-bb7e-8a3240df0982.jpg?h=0a4ba1f6840e92837d392751605b0420"},
+        {num:"9", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/7229005e-c9cf-446b-8069-8ba185f8cc1b.jpg?h=8d2d186d4dbd980148cedb9c79c36874"},
+        {num:"10", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/8534ba40-8340-4b0d-8e96-d3a505fcb3fe.jpg?h=9b85527a8abbadee72ea934dea379229"},
+    ]
+    const scImages = document.querySelector('.sc-images');
+    
+    function setImages() {
+        const setImagesHTML = slideDB.map(item => `
+            <img src="${item.img}">
+            `).join('');
+        scImages.innerHTML = setImagesHTML;
+    }
+    setImages();
+</script>
+<script src="../slide.js"></script>
+</body>
+</html>

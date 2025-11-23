@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LEE JONGHEON</title>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../pages.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="navMain">
+            <a href="../index.html">HOME</a>
+            <a href="../works.html">WORK</a>
+            <a href="../contact.html">CONTACT</a>
+        </div>
+    </nav>
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="header-l">
+                <span>HEON</span>
+            </a>
+            <input type="checkbox" name="" id="navCheckbox" class="dpnone">
+            <div class="header-r">
+                <label for="navCheckbox" id="navToggle" >
+                    +
+                </label>    
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="worksNavBar">
+            <a href="../works.html">Works</a>
+            <span>></span>
+            <span>Don't regret</span>
+        </div>
+        <section class="sc-first sc">
+            <p>
+                Brand : Ringle<br>
+                Camera : Arri Alexa<br>               
+            </p>
+        </section>
+        <section class="sc-slider sc">
+            <div class="img-container" id="imgContainer">
+            </div>
+            <div class="ctrl-container">
+                <div class="btn-move btn-move-prev">&#10094;</div>
+                <div class="btn-move btn-move-c"></div>
+                <div class="btn-move btn-move-next">&#10095;</div>
+            </div>
+        </section>
+        <section class="slideDots"></section>
+        <section class="sc-images sc">
+        </section>
+    </main>
+<!-- JS -->
+<script src="../navToggle.js"></script>
+<script>
+    const slideDB = [
+        {num:"1", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e298006b-d95b-4f2f-8bb7-ef9e9a810369.jpeg?h=37a920c04b257b054855ac535b984dde"},
+        {num:"2", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/502185af-0883-4790-ac63-07eae9586325.jpeg?h=dbaa0293e936d7907919a6b29a696079"},
+        {num:"3", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/cb7bc537-4644-474a-94a1-5e9c9700851e.jpeg?h=e7741c67c18cb6cc0de0b4e2326a581e"},
+        {num:"4", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/de779fb8-c8c0-436a-b086-09e26b29b276.jpeg?h=61fdb0ff9288af06ec86eeca6c3e599f"},
+        {num:"5", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/145bf906-e414-4e51-98d1-727b6ce1ee82.png?h=440893fef96f15e9d1d800522a6f16cf"},
+    ]
+    const scImages = document.querySelector('.sc-images');
+    
+    function setImages() {
+        const setImagesHTML = slideDB.map(item => `
+            <img src="${item.img}">
+            `).join('');
+        scImages.innerHTML = setImagesHTML;
+    }
+    setImages();
+</script>
+<script src="../slide.js"></script>
+</body>
+</html>

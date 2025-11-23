@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LEE JONGHEON</title>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../pages.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="navMain">
+            <a href="../index.html">HOME</a>
+            <a href="../works.html">WORK</a>
+            <a href="../contact.html">CONTACT</a>
+        </div>
+    </nav>
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="header-l">
+                <span>HEON</span>
+            </a>
+            <input type="checkbox" name="" id="navCheckbox" class="dpnone">
+            <div class="header-r">
+                <label for="navCheckbox" id="navToggle" >
+                    +
+                </label>    
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="worksNavBar">
+            <a href="../works.html">Works</a>
+            <span>></span>
+            <span>Keeper</span>
+        </div>
+        <section class="sc-first sc">
+            <p>
+                Director : Sarah Knar<br>
+                DOP : Wouter Verheul<br>               
+                Camera : Arri Alexa Mini<br>               
+            </p>
+        </section>
+        <section class="sc-slider sc">
+            <div class="img-container" id="imgContainer">
+            </div>
+            <div class="ctrl-container">
+                <div class="btn-move btn-move-prev">&#10094;</div>
+                <div class="btn-move btn-move-c"></div>
+                <div class="btn-move btn-move-next">&#10095;</div>
+            </div>
+        </section>
+        <section class="slideDots"></section>
+        <section class="sc-images sc">
+        </section>
+    </main>
+<!-- JS -->
+<script src="../navToggle.js"></script>
+<script>
+    const slideDB = [
+        {num:"1", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/62b146bd-d847-4c07-9ae4-042e1124c97e.jpg?h=b5fca2133aef4d5e96d722ea70d151d5"},
+        {num:"2", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/db482465-a7be-4039-ac8c-bf1909fffcb5.jpg?h=7b747022c4e0cee4b685ecb32e4be565"},
+        {num:"3", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e4f51d7d-50f2-4e88-a42c-0d0f3294c228.jpg?h=e47aca98c93e922affcb4d1bb662fd54"},
+        {num:"4", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/018d4ac3-06cd-4e2b-8736-866e66b2dba1.jpg?h=df0b12c9bfbf954d02f9f1c47fae027a"},
+        {num:"5", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/1a232754-d082-4e95-ba91-c72e5f5c78b1.jpg?h=75b45f388ca33ec8a4e748fd75465a31"},
+        {num:"6", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/2c17c592-17f4-42d8-8561-6858ad27c418.jpg?h=1bf2ee40d8c966493b19dbebcee908b2"},
+        {num:"7", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/703f02b9-8212-4692-ac52-7393e8907b4d.jpg?h=50d68acf391eb42b779e08180083dc79"},
+        {num:"8", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/9145545e-935c-48f8-aeb7-a23b9e1eba3e.jpg?h=8f63e753c2316c226609cd5d17471740"},
+        {num:"9", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/16914ab4-f02a-430f-98f6-66cb881b989f.jpg?h=34599c10877db128561a3875c2779a67"},
+    ]
+    const scImages = document.querySelector('.sc-images');
+    
+    function setImages() {
+        const setImagesHTML = slideDB.map(item => `
+            <img src="${item.img}">
+            `).join('');
+        scImages.innerHTML = setImagesHTML;
+    }
+    setImages();
+</script>
+<script src="../slide.js"></script>
+</body>
+</html>

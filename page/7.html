@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LEE JONGHEON</title>
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../pages.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="navMain">
+            <a href="../index.html">HOME</a>
+            <a href="../works.html">WORK</a>
+            <a href="../contact.html">CONTACT</a>
+        </div>
+    </nav>
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="header-l">
+                <span>HEON</span>
+            </a>
+            <input type="checkbox" name="" id="navCheckbox" class="dpnone">
+            <div class="header-r">
+                <label for="navCheckbox" id="navToggle" >
+                    +
+                </label>    
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="worksNavBar">
+            <a href="../works.html">Works</a>
+            <span>></span>
+            <span>Virile</span>
+        </div>
+        <section class="sc-first sc">
+            <p>
+                Director : Lydia Rui<br>
+                DOP : Lukas Bistricky<br>               
+                Camera : Arri Alexa Mini<br>               
+            </p>
+        </section>
+        <section class="sc-slider sc">
+            <div class="img-container" id="imgContainer">
+            </div>
+            <div class="ctrl-container">
+                <div class="btn-move btn-move-prev">&#10094;</div>
+                <div class="btn-move btn-move-c"></div>
+                <div class="btn-move btn-move-next">&#10095;</div>
+            </div>
+        </section>
+        <section class="slideDots"></section>
+        <section class="sc-images sc">
+        </section>
+    </main>
+<!-- JS -->
+<script src="../navToggle.js"></script>
+<script>
+    const slideDB = [
+        {num:"1", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/d9a9f1e8-b43f-4ff3-aefb-88df7c30da65.jpg?h=34f55deae6f16c1a4864424c2602cc83"},
+        {num:"2", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/623c989f-ce99-4a13-86fb-f3fa7c08b666.jpg?h=b9c8cdb84ad5b110fe30a4d665cab01e"},
+        {num:"3", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/4574db7e-1e14-4d75-a9ec-24509973896f.jpg?h=0d8bd205184f9b094d661c1efb885ea3"},
+        {num:"4", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/904507b8-759b-4d58-969f-e55996db773a.jpg?h=0d572e16bd35f5f9868d04868dc4c870"},
+        {num:"5", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/eaea6600-632b-435d-aa1b-3de797a2cb5c.jpg?h=f860d31140a3f821ff28d6324f91f86e"},
+        {num:"6", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/d64f9593-97c1-4abd-9932-f8ee88f93453.jpg?h=fb47b63ada1a751a83caf092ccf143d7"},
+        {num:"7", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e6ab335d-cbff-4a83-8c72-fbf47481fd94.jpg?h=f806742d1b3c26cb52eaef3e341521c8"},
+        {num:"8", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/e41ef32d-d790-4891-8062-73bf295a0de1.jpg?h=213e05c7c3c925f9e732e5da4b2f2edd"},
+        {num:"9", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/78181e43-a5ad-45a8-bc2f-4d5b9eadebee.jpg?h=19b4744ee96aa45ddabb9ed585c75bb5"},
+        {num:"10", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/76aeaa68-c3a6-4b75-bcfd-b73581adb9bc.jpg?h=4032bab60b427b0ff1f5e64ea357326b"},
+        {num:"11", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/43fb7baa-e090-4085-96db-262a2f1fa074.jpg?h=cdd4210930cd49e658eb2a7466963c47"},
+        {num:"12", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/7efcff6e-5aae-44dd-998d-5e91bb1fede5.jpg?h=089010597f7c48d1c1310a39079dfcf8"},
+        {num:"13", img : "https://cdn.myportfolio.com/39336d17-63cf-4d54-8cc4-5e93f4ae1698/de5033eb-f55f-41fc-b8c2-bae30099af0a.jpg?h=83c830e85971406c861ad723779a3292"},
+    ]
+    const scImages = document.querySelector('.sc-images');
+    
+    function setImages() {
+        const setImagesHTML = slideDB.map(item => `
+            <img src="${item.img}">
+            `).join('');
+        scImages.innerHTML = setImagesHTML;
+    }
+    setImages();
+</script>
+<script src="../slide.js"></script>
+</body>
+</html>

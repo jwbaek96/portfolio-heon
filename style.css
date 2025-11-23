@@ -1,0 +1,182 @@
+@import "./reset.css";
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+:root{
+    --witem-bgc: #000000;
+    -moz-stack-sizing: #e0d42991;
+    --txtColor-home: #ffd900;
+    --txtColor-1:#fff;
+    --txtColor-2:#dddddd;
+    --txtColor-3:#bebebe;
+    --txtColor-4:#8d8d8d;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+*{
+    text-rendering: optimizelegibility;
+    box-sizing: border-box;
+    color: var(--txtColor-1);}
+/*  */
+html{
+    width: 100vw;
+    /* height: 100%; */
+    height: 100vh;
+    height: 100dvh;
+    /* position: relative; */
+    /* overflow: hidden; */
+}
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0e0e0e;
+    position: relative;
+    /* overflow: hidden; */
+    font-family: 'Pretendard-Regular', Helvetica,sans-serif ,serif;
+}
+
+#Layer_1{
+    width: 100%;
+    height: 100%;
+    /* aspect-ratio: 1/1; */
+    position: absolute;
+    z-index: 100;
+    object-fit: contain;
+}
+
+.btn-home-vd-container{
+    z-index: 101;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 15px 25px;
+    background: #3a3a3a4f;
+    border-radius: 70px;
+    border: 1px solid #3b3b3b34;
+    backdrop-filter: blur(4px);
+    box-shadow: 0px 0px 20px #00000091 inset;
+
+    text-transform: uppercase;
+    color: #ffffff;
+    transition: padding .25s ease-in-out;
+}
+.btn-home-vd-container2{
+    z-index: 101;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 13px 23px;
+    background: #373d214f;
+    border-radius: 70px;
+    border: 2px solid var(--txtColor-home);
+    backdrop-filter: blur(4px);
+    box-shadow: 0px 0px 20px var(--kcs) inset;
+
+    text-transform: uppercase;
+    color: var(--txtColor-home);
+    transition: padding .25s ease-in-out;
+    font-size: .9rem;
+
+}
+.btn-home-vd-container2:hover{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+/* --- */
+.btn-works-container{
+    z-index: 101;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 13px 23px;
+    background: #373d214f;
+    border-radius: 70px;
+    border: 2px solid #ffd900;
+    backdrop-filter: blur(4px);
+    
+    text-transform: uppercase;
+    color: #ffd900;
+    font-size: .9rem;
+}
+.btn{
+    transition: padding .25s ease-in-out, box-shadow .25s ease-in-out;
+    box-shadow: 0px 0px 20px #e0d42991 inset;
+}
+.btn:hover{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+/* ------------------ */
+
+header{
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    background-color: #0000009c;
+    backdrop-filter: blur(6px);
+    border-bottom: rgba(255, 255, 255, 0.1) solid 1px;
+    box-shadow: 0px 0px 20px #00000091;
+}
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 25px;
+    font-size: 1.5rem;
+    max-height: 100px;
+}
+/*  */
+#navToggle{
+    z-index: 1;
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+}
+.nav{
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px 15px;
+    
+    background-color: #00000041;
+    backdrop-filter: blur(14px);
+    color: var(--txtColor-1);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+.navMain{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+/* 체크박스가 체크된 상태 */
+.header-r{transition: transform 0.4s ease-in-out;}
+input#navCheckbox:checked ~ .header-r {
+    transform: rotateZ(45deg);
+    scale: 1.2;
+}
+.navMain a{
+    color: #dddddd;
+}
+.navMain a:hover{
+    color: #ffffff;
+}

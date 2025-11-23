@@ -1,0 +1,143 @@
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    display: flex;
+    align-items: start;
+    /* justify-content:flex-start; */
+}
+main{
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    margin-top: 110px;
+    padding: 0 20px;
+    display: block;
+}
+.worksNavBar{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+    margin: 0 0 20px 0;
+    color: var(--txtColor-1);
+}
+.worksNavBar span:last-child{
+    color: var(--txtColor-3);
+}
+.worksNavBar span:nth-child(2){
+    color: var(--txtColor-4);
+    transform: scaleY(1.2) scaleX(.8);
+}
+/* --------------------------------- */
+.sc{
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.sc-first{
+    margin: 40px 0;
+}
+/* --------------------------------- */
+.sc-slider{
+    width: 90%;
+    max-width: 1000px; 
+    /* min-width: 35%; */
+    position: relative;
+    margin: 0 auto;
+    /* box-shadow: 0px 0px 15px -5px #00000070; */
+    overflow:hidden;
+}
+.img-container {
+    display: flex;
+    aspect-ratio: 16/9;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+.img-container img {
+    flex: 0 0 100%;
+    object-fit: contain;
+    aspect-ratio: 16/9;
+}
+.ctrl-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    cursor: pointer;
+
+    height: 85%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn-move{
+    /* background: rgba(255, 0, 0, 0.3); */
+    padding: 10px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.btn-move-prev {
+    justify-content: start;
+}
+.btn-move-c {
+    width: 39%;
+    cursor: zoom-in;
+    display: none;
+}
+.btn-move-next {
+    justify-content: flex-end;
+}
+
+
+
+.slideDots {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--txtColor-4);
+    margin: 0 5px;
+    cursor: pointer;
+}
+.slideDots .active{
+    background: var(--txtColor-1);
+}
+
+/* --------------------------------- */
+.sc-images{
+    /* margin-top: 100px; */
+    gap: 50px;
+    padding: 100px 0;
+}
+.sc-images img{
+    width: 100%;
+    max-width: 1300px;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+
+
+/* --------------------------------- */
+@media (max-width: 500px) {
+    main{
+        padding: 0 10px;
+    }
+    .sc-slider{
+        width: 100%;
+    }
+}
